@@ -1,0 +1,4 @@
+name = EJRST Updates
+description = Allows for code based (instead of database based) code updates
+package = Other
+core = 7.x
