@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Initially configure the site.
+ */
+function ejrst_up_install() {
+  $modules = array('comment', 'contextual', 'field_ui', 'file', 'image', 'list', 'menu', 'number', 'options', 'overlay',
+      'path', 'shortcut', 'statics', 'taxonomy', 'toolbar');
+  module_enable($modules);
+}
