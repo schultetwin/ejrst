@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * Implements hook_field_info().
+ */
+function journal_field_field_info() {
+  return array(
+    'journal_field' => array(
+      'label' => t('Journal Volume/Issue'),
+      'description' => t('Contains volume and issue information for a journal'),
+      'default_widget' => 'journal_field_widget',
+      'default_formatter' => 'journal_field_default_formatter',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function journal_field_field_widget_info() {
+  return array(
+    'journal_field_widget' => array(
+      'label' => t('Journal Field Widget'),
+      'field types' => array('journal_field'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function journal_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $element += array(
+    '#type' => 'fieldset',
+    '#attached' => array(
+      'css' => array(drupal_get_path('module', 'journal_field') . '/journal_field.css'),
+      'js' => array(drupal_get_path('module', 'journal_field') . '/journal_field.js'),
+    ),
+  );
+
+  $required = $element['#required'];
+  $item = &$items[$delta];
+  $element['volume'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Volume'),
+    '#required' => $required,
+    '#default_value' => isset($item['volume']) ? $item['volume'] : '',
+    '#size' => 3,
+    '#maxlength' => 30,
+    '#prefix' => '<div class="journal-field-volume-class">',
+    '#suffix' => '</div>',
+  );
+  $element['issue'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Issue'),
+    '#required' => $required,
+    '#default_value' => isset($item['issue']) ? $item['issue'] : '',
+    '#size' => 4,
+    '#maxlength' => 10,
+    '#prefix' => '<div class="journal-field-issue-class">',
+    '#suffix' => '</div>',
+  );
+  $element['special_issue'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Special Issue'),
+    '#description' => t('If this is a special issue, check this box.'),
+    '#default_value' => isset($item['special_issue']) ? $item['special_issue'] : FALSE,
+    '#prefix' => '<div class="journal-field-special-issue-check">',
+    '#suffix' => '</div>',
+  );
+  $element['special_issue_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Special Issue Subject'),
+    '#default_value' => isset($item['special_issue_title']) ? $item['special_issue_title'] : '',
+    '#prefix' => '<div class="journal-field-special-issue-subject">',
+    '#suffix' => '</div>',
+  );
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function journal_field_field_is_empty($item, $field) {
+  if (!isset($item['volume']) || !isset($item['issue'])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_field_validate().
+ */
+function journal_field_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  foreach ($items as $delta => $item) {
+    if (!empty($item['special_issue']) && empty($item['special_issue_title'])) {
+      $errors[$field['field_name']][$langcode][$delta][] = array(
+        'error' => 'special_issue_needs_subject',
+        'message' => t('If you designate this issue a special issue you must also give it a title'),
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_error().
+ */
+function journal_field_field_widget_error($element, $error, $form, &$form_state) {
+  form_error($element['special_issue'], $error['message']);
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function journal_field_field_formatter_info() {
+  return array(
+    'journal_field_default_formatter' => array(
+      'label' => t('Journal Field Issue and Volume'),
+      'field types' => array('journal_field'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function journal_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+
+  switch ($display['type']) {
+    case 'journal_field_default_formatter':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array('#markup' => t('Volume @v, Issue @i', array('@v' => $item['volume'], '@i' => $item['issue'])));
+      }
+  }
+  return $element;
+}

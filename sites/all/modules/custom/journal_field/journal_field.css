@@ -1,0 +1,5 @@
+.journal-field-volume-class,
+.journal-field-issue-class {
+  display: inline-block;
+  margin-right: 5px;
+}

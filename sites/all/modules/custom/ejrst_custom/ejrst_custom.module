@@ -1,0 +1,183 @@
+<?php
+
+/**
+ * Implements hook_node_presave().
+ */
+function ejrst_custom_node_presave($node) {
+  if ($node->type == 'journal') {
+    $node->title = t('Volume @v, Issue @i', array(
+      '@v' => $node->field_journal_publication[$node->language][0]['volume'],
+      '@i' => $node->field_journal_publication[$node->language][0]['volume']));
+    if ($node->field_journal_publication[$node->language][0]['special_issue']) {
+      $node->title .= t(': Special issue on !sub', array('!sub' => $node->field_journal_publication[$node->language][0]['special_issue_title']));
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ejrst_custom_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'journal_node_form') {
+    unset($form['title']);
+  }
+}
+
+/**
+ * Implements hook_field_info().
+ */
+function ejrst_custom_field_info() {
+  return array(
+    'wiley_journal_link' => array(
+      'label' => t('Wiley Journal Link'),
+      'description' => t('Computes link for wiley journal'),
+      'settings' => array(),
+      'instance_settings' => array('field_instance' => ''),
+      'default_widget' => 'wiley_journal_link',
+      'default_formatter' => 'wiley_journal_link',
+      //'no_ui' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_instance_settings_form.
+ */
+function ejrst_custom_field_instance_settings_form($field, $instance) {
+  $settings = $instance['settings'];
+
+  $bundles = $field['bundles'];
+  $bundles = array_keys($bundles);
+  $entity_type = array_pop($bundles);
+  $bundle = array_pop($field['bundles'][$entity_type]);
+
+  $fields = field_info_instances($entity_type, $bundle);
+  $options = array();
+  foreach ($fields as $key => $instance) {
+    $field_temp = field_info_field($instance['field_name']);
+    if ($field_temp['type'] == 'journal_field') {
+      $options[$key] = $instance['label'];
+    }
+  }
+
+
+  $form['field_instance'] = array(
+    '#type' => 'select',
+    '#title' => t('Link Computation Field'),
+    '#default_value' => $settings['field_instance'],
+    '#options' => $options,
+    '#required' => TRUE,
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function ejrst_custom_field_is_empty($item, $field) {
+  if (empty($item['value'])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_field_insert()
+ */
+function ejrst_custom_field_insert($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  ejrst_custom_field_update_insert($entity_type, $entity, $field, $instance, $langcode, $items);
+}
+
+/**
+ * Single code base for both update and insert hooks
+ */
+function ejrst_custom_field_update_insert($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  $pubs = field_get_items($entity_type, $entity, $instance['settings']['field_instance']);
+  foreach ($pubs as $delta => $pub) {
+    if (isset($pub['volume']) && isset($pub['issue'])) {
+      $items[$delta]['value'] = "http://onlinelibrary.wiley.com/doi/10.1002/tea.v" . $pub['volume'] . "." . $pub['issue'] . "/issuetoc";
+    }
+  }
+}
+
+/**
+ * Implements hook_field_update().
+ */
+function ejrst_custom_field_update($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  ejrst_custom_field_update_insert($entity_type, $entity, $field, $instance, $langcode, $items);
+}
+
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function ejrst_custom_field_widget_info() {
+  return array(
+    'wiley_journal_link' => array(
+      'label' => t('Wiley Journal Link'),
+      'description' => t('No form field, just a computed field'),
+      'settings' => array(),
+      'behaviors' => array(
+        'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+        'default value' => FIELD_BEHAVIOR_NONE,
+      ),
+      'field types' => array('wiley_journal_link'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function ejrst_custom_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $element['value'] = array(
+    '#type' => 'hidden',
+    '#value' => isset($items[$delta]['value']) ? $items[$delta]['value'] : NULL,
+  );
+  return $element;
+}
+
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function ejrst_custom_field_formatter_info() {
+  return array(
+    'wiley_journal_link' => array(
+      'label' => t('Wiley Journal Link'),
+      'field types' => array('wiley_journal_link'),
+    ),
+    'wiley_issue_link' => array(
+      'label' => t('Wiley Link'),
+      'field types' => array('text'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function ejrst_custom_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+
+  switch ($display['type']) {
+    case 'wiley_journal_link':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array('#markup' => l($item['value'], $item['value']));
+      }
+      break;
+    case 'wiley_issue_link':
+      foreach ($items as $delta => $item) {
+        $wiley_id = strtolower($item['value']);
+        $wiley_id = substr_replace($wiley_id , ".", 3, 0);
+        $url = 'http://onlinelibrary.wiley.com/doi/10.1002/' . $wiley_id . '/abstract';
+        $element[$delta] = l(t('Link to Wiley - @value', array('@value' => $element['#item']['value'])), $url, array('attributes' => array('target' => '_blank')));
+      }
+      break;
+  }
+
+  return $element;
+}
+

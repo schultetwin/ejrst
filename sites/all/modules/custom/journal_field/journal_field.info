@@ -1,0 +1,4 @@
+name = Journal Field
+description = Journal field has volume and issue entries
+package = Other
+core = 7.x

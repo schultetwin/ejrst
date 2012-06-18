@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function journal_field_field_schema($field) {
+  return array(
+    'columns' => array(
+      'volume' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'issue' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'special_issue' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'special_issue_title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+    ),
+  );
+}

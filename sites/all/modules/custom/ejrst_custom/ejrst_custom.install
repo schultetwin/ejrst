@@ -1,0 +1,14 @@
+<?php
+
+/*
+ * Implements hook_field_schema().
+ */
+function ejrst_custom_field_schema($field) {
+  $columns['value'] = array(
+    'type' => 'text',
+  );
+  return array(
+    'columns' => $columns,
+    'indexes' => array(),
+  );
+}
