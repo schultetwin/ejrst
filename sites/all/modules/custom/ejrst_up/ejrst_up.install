@@ -7,4 +7,72 @@ function ejrst_up_install() {
   $modules = array('comment', 'contextual', 'field_ui', 'file', 'image', 'list', 'menu', 'number', 'options', 'overlay',
       'path', 'shortcut', 'statistics', 'taxonomy', 'toolbar');
   module_enable($modules);
+  ejrst_up_init_blocks();
+  ejrst_up_setup_tax_terms();
+}
+
+function ejrst_up_update_7000(&$sandbox) {
+  ejrst_up_init_blocks();
+}
+
+function ejrst_update_7001(&$sandbox) {
+  
+}
+
+function ejrst_up_update_7002(&$sandbox) {
+  ejrst_up_setup_tax_terms();
+}
+
+function ejrst_up_init_blocks() {
+  db_update('block')
+    ->fields(array('region' => -1))
+    ->condition('delta', 'main', '!=')
+    ->execute();
+}
+
+function ejrst_up_setup_tax_terms() {
+  $terms = array(
+    'conceptual_area' => array(
+      'Assessment',
+      'College Science Teaching',
+      'Curriculum and Instruction',
+      'Global, International, and Compartive Studies',
+      'Informal Learning',
+      'Learning',
+      'Learning Technologies',
+      'Policy',
+      'Sociocultural Studies (Context Culture and Discourse)',
+      'Teacher Education/Teacher Learning',
+    ),
+    'grade_level' => array(
+      'College/University Science',
+      'Community/Adult Ed',
+      'Elementary (age 5-11)',
+      'Middle School (age 11-14)',
+      'Secondary (age 14-18)',
+    ),
+    'methodology' => array(
+      'Conversation and Discourse Analysis',
+      'Design Study/Design Experiment',
+      'Qualitative (includes ethnography case study small scale)',
+      'Quantitative (includes experimental quasi-experimental large scale)',
+      'Review (includes meta-analysis, research briefs)',
+    ),
+    'science topic' => array(
+      'Biology/Life Science',
+      'Chemistry',
+      'Earth/Space Science',
+      'General Science',
+      'Physics/Physical Science',
+    ),
+  );
+
+  foreach ($terms as $vocab => $vocab_terms) {
+    foreach ($vocab_terms as $term_name) {
+      $term = new stdClass();
+      $term->name = $term_name;
+      $term->vocabulary_machine_name = $vocab;
+      taxonomy_term_save($term);
+    }
+  }
 }
