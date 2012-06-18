@@ -5,7 +5,7 @@
  */
 function ejrst_up_install() {
   $modules = array('comment', 'contextual', 'field_ui', 'file', 'image', 'list', 'menu', 'number', 'options', 'overlay',
-      'path', 'shortcut', 'statistics', 'taxonomy', 'toolbar');
+      'path', 'shortcut', 'statistics', 'taxonomy', 'toolbar', 'ejrst_journal', 'ejrst_articles');
   module_enable($modules);
   ejrst_up_init_blocks();
   ejrst_up_setup_tax_terms();
@@ -21,6 +21,10 @@ function ejrst_update_7001(&$sandbox) {
 
 function ejrst_up_update_7002(&$sandbox) {
   ejrst_up_setup_tax_terms();
+}
+
+function ejrst_up_update_7003(&$sandbox) {
+  module_enable(array('ejrst_journal', 'ejrst_articles'));
 }
 
 function ejrst_up_init_blocks() {

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EJRST Articles feature.
+ */
+
+include_once 'ejrst_articles.features.inc';
