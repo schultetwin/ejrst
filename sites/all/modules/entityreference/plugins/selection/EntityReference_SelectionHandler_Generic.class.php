@@ -331,7 +331,7 @@ class EntityReference_SelectionHandler_Generic_user extends EntityReference_Sele
       // database.
       $conditions = &$query->conditions();
       foreach ($conditions as $key => $condition) {
-        if ($condition['field'] == 'users.name') {
+        if ($key != '#conjunction' && $condition['field'] == 'users.name') {
           // Remove the condition.
           unset($conditions[$key]);
 

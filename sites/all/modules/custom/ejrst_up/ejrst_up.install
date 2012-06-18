@@ -62,7 +62,7 @@ function ejrst_up_setup_tax_terms() {
       'Quantitative (includes experimental quasi-experimental large scale)',
       'Review (includes meta-analysis, research briefs)',
     ),
-    'science topic' => array(
+    'science_topic' => array(
       'Biology/Life Science',
       'Chemistry',
       'Earth/Space Science',
@@ -72,10 +72,11 @@ function ejrst_up_setup_tax_terms() {
   );
 
   foreach ($terms as $vocab => $vocab_terms) {
+    $vocabulary = taxonomy_vocabulary_machine_name_load($vocab);
     foreach ($vocab_terms as $term_name) {
       $term = new stdClass();
       $term->name = $term_name;
-      $term->vocabulary_machine_name = $vocab;
+      $term->vid = $vocabulary->vid;
       taxonomy_term_save($term);
     }
   }
