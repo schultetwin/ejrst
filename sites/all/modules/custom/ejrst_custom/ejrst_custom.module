@@ -1,6 +1,20 @@
 <?php
 
 /**
+ * Implements hook_menu().
+ */
+function ejrst_custom_menu() {
+  $items = array();
+  $items['front'] = array(
+    'title' => 'Welcome to EJRST',
+    'page callback' => 'ejrst_custom_front_page',
+    'access callback' => TRUE,
+    'file' => 'ejrst_custom.pages.inc',
+  );
+
+  return $items;
+}
+/**
  * Implements hook_node_presave().
  */
 function ejrst_custom_node_presave($node) {
@@ -14,6 +28,31 @@ function ejrst_custom_node_presave($node) {
   }
 }
 
+/**
+ * Implements hook_node_view().
+ */
+function ejrst_custom_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'journal') {
+    $node->content['ejrst_issue_list'] = array('#markup' => views_embed_view('issues_in_journal', 'default', $node->nid));
+  }
+}
+
+/**
+ * Implements hook_node_extra_fields().
+ */
+function ejrst_custom_field_extra_fields() {
+  $extra = array();
+  $extra['node']['journal'] = array(
+    'display' => array(
+      'ejrst_issue_list' => array(
+        'label' => t('Issue List'),
+        'description' => t('List of issues in Journal'),
+        'weight' => 0,
+      ),
+    ),
+  );
+  return $extra;
+}
 /**
  * Implements hook_form_alter().
  */
@@ -173,11 +212,10 @@ function ejrst_custom_field_formatter_view($entity_type, $entity, $field, $insta
         $wiley_id = strtolower($item['value']);
         $wiley_id = substr_replace($wiley_id , ".", 3, 0);
         $url = 'http://onlinelibrary.wiley.com/doi/10.1002/' . $wiley_id . '/abstract';
-        $element[$delta] = l(t('Link to Wiley - @value', array('@value' => $element['#item']['value'])), $url, array('attributes' => array('target' => '_blank')));
+        $element[$delta] = array('#markup' => l(t('Link to Wiley - @value', array('@value' => $item['value'])), $url, array('attributes' => array('target' => '_blank'))));
       }
       break;
   }
 
   return $element;
 }
-
