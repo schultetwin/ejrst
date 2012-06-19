@@ -81,7 +81,18 @@ function ejrst_journal_strongarm() {
           'weight' => '-5',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'ejrst_issue_list' => array(
+          'default' => array(
+            'weight' => '4',
+            'visible' => TRUE,
+          ),
+          'teaser' => array(
+            'weight' => '2',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__journal'] = $strongarm;

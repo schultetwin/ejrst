@@ -112,17 +112,17 @@ function ejrst_journal_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
-            'image_style' => 'large',
+            'image_style' => 'journal_cover_large',
           ),
           'type' => 'image',
-          'weight' => '3',
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'above',
           'module' => 'image',
           'settings' => array(
             'image_link' => 'content',
-            'image_style' => 'thumbnail',
+            'image_style' => 'journal_cover_small',
           ),
           'type' => 'image',
           'weight' => '0',
@@ -182,7 +182,7 @@ function ejrst_journal_field_default_fields() {
           'module' => 'ejrst_custom',
           'settings' => array(),
           'type' => 'wiley_journal_link',
-          'weight' => '5',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -244,7 +244,7 @@ function ejrst_journal_field_default_fields() {
           'module' => 'journal_field',
           'settings' => array(),
           'type' => 'journal_field_default_formatter',
-          'weight' => '4',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -316,7 +316,7 @@ function ejrst_journal_field_default_fields() {
             'multiple_to' => '',
           ),
           'type' => 'date_default',
-          'weight' => '1',
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'above',

@@ -196,7 +196,7 @@ function ejrst_articles_field_default_fields() {
           'label' => 'above',
           'module' => 'entityreference',
           'settings' => array(
-            'link' => FALSE,
+            'link' => 1,
           ),
           'type' => 'entityreference_label',
           'weight' => '3',
@@ -229,7 +229,7 @@ function ejrst_articles_field_default_fields() {
   $fields['node-article-field_article_co_authors'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_article_co_authors',
@@ -275,7 +275,7 @@ function ejrst_articles_field_default_fields() {
           'label' => 'above',
           'module' => 'entityreference',
           'settings' => array(
-            'link' => FALSE,
+            'link' => 1,
           ),
           'type' => 'entityreference_label',
           'weight' => '4',
@@ -299,7 +299,7 @@ function ejrst_articles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '0',
+        'weight' => 0,
       ),
     ),
   );
@@ -399,14 +399,19 @@ function ejrst_articles_field_default_fields() {
       'settings' => array(
         'handler' => 'base',
         'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
           'sort' => array(
             'direction' => 'DESC',
-            'field' => 'field_journal_publication_date:value',
+            'field' => 'body:value',
             'property' => 'nid',
-            'type' => 'field',
+            'type' => 'none',
           ),
           'target_bundles' => array(
-            'article' => 'article',
+            'journal' => 'journal',
           ),
         ),
         'handler_submit' => 'Change handler',
@@ -425,7 +430,7 @@ function ejrst_articles_field_default_fields() {
           'label' => 'above',
           'module' => 'entityreference',
           'settings' => array(
-            'link' => FALSE,
+            'link' => 1,
           ),
           'type' => 'entityreference_label',
           'weight' => '1',

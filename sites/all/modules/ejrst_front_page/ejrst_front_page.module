@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EJRST front page feature.
+ */
+
+include_once 'ejrst_front_page.features.inc';
