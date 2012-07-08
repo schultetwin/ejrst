@@ -6,7 +6,7 @@
 function ejrst_up_install() {
   $modules = array('comment', 'contextual', 'field_ui', 'file', 'image', 'list', 'menu', 'number', 'options', 'overlay',
       'path', 'shortcut', 'statistics', 'taxonomy', 'toolbar', 'ejrst_journal', 'ejrst_articles', 'ejrst_front_page',
-      'ejrst_base', 'ejrst_groups', 'ejrst_notes', 'ejrst_tasks', 'ejrst_wiki',
+      'ejrst_base', 'ejrst_groups', 'ejrst_notes', 'ejrst_tasks', 'ejrst_wiki', 'og_features', 'ejrst_og_features',
     );
   module_enable($modules);
   ejrst_up_init_blocks();
@@ -60,6 +60,10 @@ function ejrst_up_update_7008(&$sandbox) {
 
 function ejrst_up_update_7009(&$sandbox) {
   module_enable(array('ejrst_wiki'));
+}
+
+function ejrst_up_update_7010(&$sandbox) {
+  module_enable(array('og_features', 'ejrst_og_features'));
 }
 
 function ejrst_up_init_blocks() {
