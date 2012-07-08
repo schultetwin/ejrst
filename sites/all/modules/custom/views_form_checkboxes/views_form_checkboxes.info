@@ -1,0 +1,6 @@
+name = Views Form Checkboxes
+description = Adds a checkbox for all boolean fields
+package = Views Form Fields
+core = 7.x
+
+files[] = views/views_form_checkboxes_handler_view_field.inc

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EJRST Base feature.
+ */
+
+include_once 'ejrst_base.features.inc';

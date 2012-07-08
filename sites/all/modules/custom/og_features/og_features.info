@@ -1,0 +1,4 @@
+name = OG Features
+description = Allows for groups to enable or disable specific functionality
+package = OG Features
+core = 7.x

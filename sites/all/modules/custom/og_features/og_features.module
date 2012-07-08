@@ -1,0 +1,82 @@
+<?php
+
+define('OG_FEATURES_FIELD', 'og_features_selection');
+
+/**
+ * Implements hook_og_fields_info().
+ */
+function og_features_og_fields_info() {
+  $items = array();
+  $items[OG_FEATURES_FIELD] = array(
+    'type' => array('group'),
+    'description' => t('Group Features selection'),
+    'field' => array(
+      'field_name' => OG_FEATURES_FIELD,
+      'no_ui' => TRUE,
+      'type' => 'list_text',
+      'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+      'settings' => array(
+        'allowed_values' => array(),
+        'allowed_values_function' => 'og_features_get_features',
+      ),
+    ),
+    'instance' => array(
+      'label' => t('Group Features'),
+      'widget' => array(
+        'type' => 'options_buttons',
+        'settings' => array(),
+      ),
+      'required' => FALSE,
+      'default_value' => array(),
+      'displays' => array(),
+    ),
+  );
+  return $items;
+}
+
+
+/**
+ * Calls hook to define all the enabled/disabled group features.
+ */
+function og_features_get_features() {
+  $types = &drupal_static(__FUNCTION__, array());
+  if (empty($types)) {
+    foreach (module_implements('og_features_registry') as $module) {
+      $function = $module . '_og_features_registry';
+      $module_types = $function();
+      foreach ($module_types as $name => $info) {
+        $types[$name] = $info;
+      }
+    }
+  }
+  return $types;
+}
+
+/**
+ * Rest og_features_get_features().
+ */
+function og_features_reset_get_features() {
+  drupal_static_reset('og_features_get_features');
+}
+
+/**
+ * Group get enabled features
+ */
+function og_features_group($entity_type, $entity) {
+  $return = array();
+  $values = field_get_items($entity_type, $entity, OG_FEATURES_FIELD);
+  if (!empty($values)) {
+    foreach ($values as $val) {
+      $return[] = $val['value'];
+    }
+  }
+  return $return;
+}
+
+/**
+ * See if a feature is enabled for a group
+ */
+function og_features_is_enabled($entity_type, $entity, $feature) {
+  $values = og_features_group($entity_type, $entity);
+  return in_array($feature, $values);
+}

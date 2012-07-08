@@ -5,7 +5,9 @@
  */
 function ejrst_up_install() {
   $modules = array('comment', 'contextual', 'field_ui', 'file', 'image', 'list', 'menu', 'number', 'options', 'overlay',
-      'path', 'shortcut', 'statistics', 'taxonomy', 'toolbar', 'ejrst_journal', 'ejrst_articles', 'ejrst_front_page');
+      'path', 'shortcut', 'statistics', 'taxonomy', 'toolbar', 'ejrst_journal', 'ejrst_articles', 'ejrst_front_page',
+      'ejrst_base', 'ejrst_groups', 'ejrst_notes', 'ejrst_tasks', 'ejrst_wiki',
+    );
   module_enable($modules);
   ejrst_up_init_blocks();
   ejrst_up_setup_tax_terms();
@@ -32,6 +34,32 @@ function ejrst_up_update_7003(&$sandbox) {
  */
 function ejrst_up_update_7004(&$sandbox) {
   module_enable(array('ejrst_front_page'));
+}
+
+/**
+ * Enable base feature
+ */
+function ejrst_up_update_7005(&$sandbox) {
+  module_enable(array('ejrst_base'));
+}
+
+/**
+ * Enable the group feature
+ */
+function ejrst_up_update_7006(&$sandbox) {
+  module_enable(array('ejrst_groups'));
+}
+
+function ejrst_up_update_7007(&$sandbox) {
+  module_enable(array('ejrst_notes'));
+}
+
+function ejrst_up_update_7008(&$sandbox) {
+  module_enable(array('ejrst_tasks'));
+}
+
+function ejrst_up_update_7009(&$sandbox) {
+  module_enable(array('ejrst_wiki'));
 }
 
 function ejrst_up_init_blocks() {

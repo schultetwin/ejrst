@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * Implements hook_views_api().
+ */
+function views_form_checkboxes_views_api() {
+  return array(
+    'version' => 3,
+  );
+}
+
+/**
+ * Implements hook_field_views_data_alter().
+ */
+function views_form_checkboxes_field_views_data_alter(&$result, $field, $module) {
+  if ($field['type'] == 'list_boolean') {
+    foreach ($result as &$info) {
+      if (!isset($info['revision_id'])) {
+        $array = $info[$field['field_name']];
+      }
+      else {
+        $array = $info[$field['field_name'] . '-revision_id'];
+      }
+      $info[$field['field_name'] . '_form'] = $array;
+      $info[$field['field_name'] . '_form']['field']['handler'] = 'views_form_checkboxes_handler_view_field';
+      $info[$field['field_name'] . '_form']['title'] .= ' (form)';
+      $info[$field['field_name'] . '_form']['title short'] .= ' (form)';
+    }
+  }
+}
+
+function views_form_checkboxes_ajax_callback($form, $form_state) {
+  // Get the proper results
+  $parents = $form_state['triggering_element']['#array_parents'];
+  array_pop($parents);
+  $result = drupal_array_get_nested_value($form_state['values'], $parents);
+
+  // Load the entity
+  $entities = entity_load($result['entity_type'], array($result['entity_id']));
+  $entity = array_pop($entities);
+
+  // Save the new field
+  $entity_wrapper = entity_metadata_wrapper($result['entity_type'], $entity);
+  $entity_wrapper->{$result['field_name']}->set($result['checkbox_form']);
+  $entity_wrapper->save();
+
+  // Update the form
+  $element = drupal_array_get_nested_value($form, $parents);
+  $field_view = field_view_field($result['entity_type'], $entity, $result['field_name']);
+  $element['checkbox_form']['#title'] = drupal_render(array_pop($field_view));
+  return $element;
+}

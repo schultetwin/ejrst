@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EJRST Wiki feature.
+ */
+
+include_once 'ejrst_wiki.features.inc';

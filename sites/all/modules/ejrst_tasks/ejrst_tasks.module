@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EJRST Tasks feature.
+ */
+
+include_once 'ejrst_tasks.features.inc';

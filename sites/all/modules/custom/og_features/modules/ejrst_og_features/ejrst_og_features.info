@@ -1,0 +1,4 @@
+name = EJRST OG Features
+description = A feature that allows for group based features
+package = OG Features
+core = 7.x

@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * Implements hook_og_features_registry() for the node module.
+ */
+function ejrst_og_features_og_features_registry() {
+  $options = array(
+    'discussion' => t('Discussions'),
+    'blog' => t('Blogs'),
+    'wiki' => t('Wiki'),
+    'events' => t('Events'),
+    'note' => t('Notes'),
+    'task' => t('Tasks'),
+    'news' => t('News'),
+  );
+  return $options;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function ejrst_og_features_menu() {
+  $items = array();
+  foreach (ejrst_og_features_og_features_registry() as $key => $name) {
+    $items['node/%node/' . $key] = array(
+      'title' => $name,
+      'page callback' => 'ejrst_og_features_page',
+      'page arguments' => array(1, $key),
+      'access callback' => 'ejrst_og_features_access',
+      'access arguments' => array(1, $key),
+      'weight' => 2,
+      'file' => 'ejrst_og_features.pages.inc',
+      'type' => MENU_LOCAL_TASK,
+    );
+  }
+
+  return $items;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function ejrst_og_features_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'ejrst_og_features') . '/views/',
+  );
+}
+
+/*
+ * Access callback for ejrst og features
+ */
+function ejrst_og_features_access($node, $type) {
+  if (!og_features_is_enabled('node', $node, $type)) {
+    return FALSE;
+  }
+  return node_access('view', $node);
+}
