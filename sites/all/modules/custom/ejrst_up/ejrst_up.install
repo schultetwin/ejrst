@@ -71,6 +71,17 @@ function ejrst_up_update_7011(&$sandbox) {
   module_enable(array('ejrst_news'));
 }
 
+function ejrst_up_update_7012(&$sandbox) {
+  ejrst_up_feature_revert(array('ejrst_articles'));
+}
+
+/**
+ * Update the ejrst_journal views to be more stylishly pleasing
+ */
+function ejrst_up_update_7013(&$sandbox) {
+  ejrst_up_feature_revert(array('ejrst_journal'));
+}
+
 function ejrst_up_init_blocks() {
   db_update('block')
     ->fields(array('region' => -1))

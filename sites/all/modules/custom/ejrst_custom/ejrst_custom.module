@@ -38,7 +38,11 @@ function ejrst_custom_node_presave($node) {
  */
 function ejrst_custom_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'journal') {
-    $node->content['ejrst_issue_list'] = array('#markup' => views_embed_view('issues_in_journal', 'default', $node->nid));
+    $node->content['ejrst_issue_list'] = array(
+      array('#markup' => t('Articles in Issue'), '#prefix' => '<div class="articles-in-issue-title">', '#suffix' => '</div>'),
+      array('#markup' => views_embed_view('issues_in_journal', 'default', $node->nid)),
+    );
+    drupal_add_css(drupal_get_path('module', 'ejrst_custom') . '/ejrst_custom.css');
   }
 }
 

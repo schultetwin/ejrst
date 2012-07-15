@@ -12,3 +12,17 @@
   width: auto;
 }
 
+.articles-in-issue-title {
+  margin-top: 40px;
+  font-size: 1.3em;
+}
+
+.view-issues-in-journal .views-row {
+  padding: 20px;
+  border-bottom: 1px solid gray;
+}
+
+.view-issues-in-journal .views-field-title {
+  font-size: 1.1em;
+}
+
