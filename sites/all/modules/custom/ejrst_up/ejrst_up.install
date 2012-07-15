@@ -89,6 +89,10 @@ function ejrst_up_update_7014(&$sandbox) {
   }
 }
 
+function erjst_up_update_7015(&$sandbox) {
+  ejrst_up_feature_revert(array('ejrst_groups'));
+}
+
 function ejrst_up_init_blocks() {
   db_update('block')
     ->fields(array('region' => -1))

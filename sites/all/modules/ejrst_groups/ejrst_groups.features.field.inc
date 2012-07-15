@@ -126,7 +126,7 @@ function ejrst_groups_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'body',
-      'label' => 'Mission Statement',
+      'label' => 'Description',
       'required' => 0,
       'settings' => array(
         'display_summary' => 1,
@@ -212,7 +212,7 @@ function ejrst_groups_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -283,7 +283,7 @@ function ejrst_groups_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -354,7 +354,7 @@ function ejrst_groups_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -438,7 +438,7 @@ function ejrst_groups_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '8',
+        'weight' => '4',
       ),
     ),
   );
@@ -509,7 +509,7 @@ function ejrst_groups_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -552,10 +552,10 @@ function ejrst_groups_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '6',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -632,7 +632,7 @@ function ejrst_groups_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '7',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -668,6 +668,66 @@ function ejrst_groups_field_default_fields() {
         ),
         'type' => 'options_onoff',
         'weight' => '1',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-group-og_features_selection'.
+  $fields['node-group-og_features_selection'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'og_features_selection',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'no_ui' => TRUE,
+      'settings' => array(
+        'allowed_values' => array(),
+        'allowed_values_function' => 'og_features_get_features',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'group',
+      'default_value' => array(),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '8',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'displays' => array(),
+      'entity_type' => 'node',
+      'field_name' => 'og_features_selection',
+      'label' => 'Group Features',
+      'required' => FALSE,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '9',
       ),
     ),
   );
@@ -812,14 +872,15 @@ function ejrst_groups_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Comment');
   t('Conceptual Area');
+  t('Description');
   t('Determine if this is an OG group.');
   t('Grade level');
   t('Group');
+  t('Group Features');
   t('Group Picture');
   t('Group visibility');
   t('Groups audience');
   t('Methodology');
-  t('Mission Statement');
   t('Request message');
   t('Science Topic');
   t('This is the text a user may send to the group administrators.');

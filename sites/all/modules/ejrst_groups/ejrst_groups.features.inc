@@ -36,19 +36,25 @@ function ejrst_groups_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'roles' => array(
-      'flag' => array(),
-      'unflag' => array(),
+      'flag' => array(
+        0 => '3',
+        1 => '4',
+      ),
+      'unflag' => array(
+        0 => '3',
+        1 => '4',
+      ),
     ),
     'show_on_page' => 1,
     'show_on_teaser' => 1,
     'show_on_form' => 0,
     'access_author' => '',
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 'ejrst_groups',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   return $flags;
 }
