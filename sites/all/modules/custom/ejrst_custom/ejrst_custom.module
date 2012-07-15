@@ -26,7 +26,7 @@ function ejrst_custom_node_presave($node) {
     $volume_issue = field_get_items(('node'), $node, 'field_journal_publication');
     $node->title = t('Volume @v, Issue @i', array(
       '@v' => $volume_issue[0]['volume'],
-      '@i' => $volume_issue[0]['volume']));
+      '@i' => $volume_issue[0]['issue']));
     if ($volume_issue[0]['special_issue']) {
       $node->title .= t(': Special issue on !sub', array('!sub' => $volume_issue[0]['special_issue_title']));
     }
