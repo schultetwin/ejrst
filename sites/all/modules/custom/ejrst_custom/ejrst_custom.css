@@ -1,0 +1,14 @@
+/* 
+    Document   : ejrst_custom.css
+    Created on : Jul 15, 2012, 5:03:41 PM
+    Author     : mark
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#edit-field-article-co-authors-und {
+  max-height: 200px;
+  overflow-y: scroll;
+  width: auto;
+}
+

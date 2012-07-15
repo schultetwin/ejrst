@@ -67,6 +67,9 @@ function ejrst_custom_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'journal_node_form') {
     unset($form['title']);
   }
+  if ($form_id == 'article_node_form') {
+    drupal_add_css(drupal_get_path('module', 'ejrst_custom') . '/ejrst_custom.css');
+  }
 }
 
 /**
