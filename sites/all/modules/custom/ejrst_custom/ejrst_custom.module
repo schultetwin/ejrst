@@ -16,9 +16,13 @@ function ejrst_custom_menu() {
 }
 /**
  * Implements hook_node_presave().
+ *
+ * Changes the title of the journal content type.
  */
 function ejrst_custom_node_presave($node) {
   if ($node->type == 'journal') {
+    // This is a "required" field that should always have a cardinality of one,
+    // so we shouldn't have to do any checking here.
     $volume_issue = field_get_items(('node'), $node, 'field_journal_publication');
     $node->title = t('Volume @v, Issue @i', array(
       '@v' => $volume_issue[0]['volume'],
@@ -56,6 +60,8 @@ function ejrst_custom_field_extra_fields() {
 }
 /**
  * Implements hook_form_alter().
+ *
+ * Unset the node title form element because title is created automagically.
  */
 function ejrst_custom_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'journal_node_form') {
@@ -75,7 +81,7 @@ function ejrst_custom_field_info() {
       'instance_settings' => array('field_instance' => ''),
       'default_widget' => 'wiley_journal_link',
       'default_formatter' => 'wiley_journal_link',
-      //'no_ui' => TRUE,
+      'no_ui' => TRUE,
     ),
   );
 }
