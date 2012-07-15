@@ -115,7 +115,7 @@ function ejrst_journal_field_default_fields() {
             'image_style' => 'journal_cover_large',
           ),
           'type' => 'image',
-          'weight' => '1',
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -240,7 +240,7 @@ function ejrst_journal_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'inline',
           'module' => 'journal_field',
           'settings' => array(),
           'type' => 'journal_field_default_formatter',
@@ -306,7 +306,7 @@ function ejrst_journal_field_default_fields() {
       'description' => 'Publication date (ex. "December 2009")',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'inline',
           'module' => 'date',
           'settings' => array(
             'format_type' => 'long',
@@ -316,7 +316,7 @@ function ejrst_journal_field_default_fields() {
             'multiple_to' => '',
           ),
           'type' => 'date_default',
-          'weight' => '0',
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'above',
