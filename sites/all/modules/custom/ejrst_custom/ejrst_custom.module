@@ -18,17 +18,29 @@ function ejrst_custom_menu() {
  * Implements hook_node_presave().
  *
  * Changes the title of the journal content type.
+ *
+ * Changes "referenced article" of discussion if necessary
  */
 function ejrst_custom_node_presave($node) {
   if ($node->type == 'journal') {
     // This is a "required" field that should always have a cardinality of one,
     // so we shouldn't have to do any checking here.
     $volume_issue = field_get_items(('node'), $node, 'field_journal_publication');
-    $node->title = t('Volume @v, Issue @i', array(
-      '@v' => $volume_issue[0]['volume'],
-      '@i' => $volume_issue[0]['issue']));
+    $date_issue = field_get_items('node', $node, 'field_journal_publication_date');
+
+    $node->title = date('F Y', $date_issue[0]['value']);
     if ($volume_issue[0]['special_issue']) {
-      $node->title .= t(': Special issue on !sub', array('!sub' => $volume_issue[0]['special_issue_title']));
+      $node->title = t('Special issue on !sub', array('!sub' => $volume_issue[0]['special_issue_title']));
+    }
+  }
+
+  if ($node->type == 'discussion') {
+    if (isset($_GET['article']) && is_numeric($_GET['article'])){
+      $node_wrapper = entity_metadata_wrapper('node', $node);
+      $target_id = $node_wrapper->field_discussion_article->value();
+      if (empty($target_id)) {
+        //$node_wrapper->field_discussion_article->set($_GET['article']);
+      }
     }
   }
 }
@@ -67,12 +79,18 @@ function ejrst_custom_field_extra_fields() {
  *
  * Unset the node title form element because title is created automagically.
  */
-function ejrst_custom_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'journal_node_form') {
-    unset($form['title']);
-  }
-  if ($form_id == 'article_node_form') {
-    drupal_add_css(drupal_get_path('module', 'ejrst_custom') . '/ejrst_custom.css');
+function ejrst_custom_form_journal_node_form_alter(&$form, &$form_state, $form_id) {
+  unset($form['title']);
+}
+
+function ejrst_custom_form_article_node_form_alter(&$form, &$form_state, $form_id) {
+  drupal_add_css(drupal_get_path('module', 'ejrst_custom') . '/ejrst_custom.css');
+
+}
+
+function ejrst_custom_form_discussion_node_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($_GET['article']) && is_numeric($_GET['article'])) {
+    //$form['field_discussion_article'][LANGUAGE_NONE]['#default_value']['0'] = $_GET['article'];
   }
 }
 

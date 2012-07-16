@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EJRST Discussions feature.
+ */
+
+include_once 'ejrst_discussions.features.inc';

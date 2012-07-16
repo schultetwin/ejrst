@@ -13,91 +13,130 @@ function ejrst_articles_user_default_permissions() {
   // Exported permission: create article content.
   $permissions['create article content'] = array(
     'name' => 'create article content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: delete any article content.
   $permissions['delete any article content'] = array(
     'name' => 'delete any article content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: delete own article content.
   $permissions['delete own article content'] = array(
     'name' => 'delete own article content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: delete terms in 1.
   $permissions['delete terms in 1'] = array(
     'name' => 'delete terms in 1',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: delete terms in 2.
   $permissions['delete terms in 2'] = array(
     'name' => 'delete terms in 2',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: delete terms in 3.
   $permissions['delete terms in 3'] = array(
     'name' => 'delete terms in 3',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: delete terms in 4.
   $permissions['delete terms in 4'] = array(
     'name' => 'delete terms in 4',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: edit any article content.
   $permissions['edit any article content'] = array(
     'name' => 'edit any article content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: edit own article content.
   $permissions['edit own article content'] = array(
     'name' => 'edit own article content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: edit terms in 1.
   $permissions['edit terms in 1'] = array(
     'name' => 'edit terms in 1',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: edit terms in 2.
   $permissions['edit terms in 2'] = array(
     'name' => 'edit terms in 2',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: edit terms in 3.
   $permissions['edit terms in 3'] = array(
     'name' => 'edit terms in 3',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: edit terms in 4.
   $permissions['edit terms in 4'] = array(
     'name' => 'edit terms in 4',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
     'module' => 'taxonomy',
   );
 

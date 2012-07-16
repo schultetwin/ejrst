@@ -2,6 +2,7 @@ name = EJRST Tasks
 description = Tasks for groups
 core = 7.x
 package = Features
+php = 5.2.4
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = entityreference
