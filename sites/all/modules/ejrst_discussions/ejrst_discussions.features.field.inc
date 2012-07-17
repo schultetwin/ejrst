@@ -222,7 +222,7 @@ function ejrst_discussions_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_discussion_article',
       'field_permissions' => array(
-        'type' => '2',
+        'type' => '0',
       ),
       'foreign keys' => array(
         'node' => array(
@@ -266,6 +266,7 @@ function ejrst_discussions_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'discussion',
       'default_value' => NULL,
+      'default_value_function' => 'entityreference_prepopulate_field_default_value',
       'deleted' => '0',
       'description' => 'Discussions may relate to an article. Only admins and editors are allowed to set this setting. Otherwise, this should not appear.',
       'display' => array(
@@ -290,6 +291,14 @@ function ejrst_discussions_field_default_fields() {
       'label' => 'Article',
       'required' => 0,
       'settings' => array(
+        'behaviors' => array(
+          'prepopulate' => array(
+            'action' => 'hide',
+            'fallback' => 'hide',
+            'skip_perm' => 'edit any discussion content',
+            'status' => 1,
+          ),
+        ),
         'user_register_form' => FALSE,
       ),
       'widget' => array(

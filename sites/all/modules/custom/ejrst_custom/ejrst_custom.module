@@ -33,16 +33,6 @@ function ejrst_custom_node_presave($node) {
       $node->title = t('Special issue on !sub', array('!sub' => $volume_issue[0]['special_issue_title']));
     }
   }
-
-  if ($node->type == 'discussion') {
-    if (isset($_GET['article']) && is_numeric($_GET['article'])){
-      $node_wrapper = entity_metadata_wrapper('node', $node);
-      $target_id = $node_wrapper->field_discussion_article->value();
-      if (empty($target_id)) {
-        //$node_wrapper->field_discussion_article->set($_GET['article']);
-      }
-    }
-  }
 }
 
 /**
@@ -88,9 +78,17 @@ function ejrst_custom_form_article_node_form_alter(&$form, &$form_state, $form_i
 
 }
 
-function ejrst_custom_form_discussion_node_form_alter(&$form, &$form_state, $form_id) {
-  if (isset($_GET['article']) && is_numeric($_GET['article'])) {
-    //$form['field_discussion_article'][LANGUAGE_NONE]['#default_value']['0'] = $_GET['article'];
+/**
+ * Implements hook_field_access().
+ *
+ * If we are creating a new "discussion" then we should disable the group audience
+ * field if we are adding it to an article.
+ */
+function ejrst_custom_field_access($op, $field, $entity_type, $entity, $account) {
+  if ($entity_type == 'node' && !is_null($entity) && $entity->type == 'discussion' && $field['field_name'] == 'group_audience') {
+    if (isset($_GET['field_discussion_article']) && is_numeric($_GET['field_discussion_article'])) {
+      return FALSE;
+    }
   }
 }
 
