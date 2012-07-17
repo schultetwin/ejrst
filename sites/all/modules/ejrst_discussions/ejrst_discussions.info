@@ -7,6 +7,7 @@ dependencies[] = context
 dependencies[] = ctools
 dependencies[] = ejrst_articles
 dependencies[] = entityreference
+dependencies[] = entityreference_prepopulate
 dependencies[] = features
 dependencies[] = field_permissions
 dependencies[] = file
