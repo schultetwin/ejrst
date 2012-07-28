@@ -10,7 +10,7 @@
 function ejrst_discussions_views_default_views() {
   $export = array();
 
-  $view = new view();
+  $view = new view;
   $view->name = 'article_discussions';
   $view->description = '';
   $view->tag = 'default';
@@ -27,6 +27,7 @@ function ejrst_discussions_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '6';
@@ -37,6 +38,8 @@ function ejrst_discussions_views_default_views() {
     'new_comments' => 'new_comments',
   );
   $handler->display->display_options['row_options']['separator'] = ' ';
+  $handler->display->display_options['row_options']['hide_empty'] = 0;
+  $handler->display->display_options['row_options']['default_field_elements'] = 1;
   /* Footer: Global: Text area */
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
@@ -44,7 +47,7 @@ function ejrst_discussions_views_default_views() {
   $handler->display->display_options['footer']['area']['empty'] = TRUE;
   $handler->display->display_options['footer']['area']['content'] = '<a href="/node/add/discussion?field_discussion_article=!1">Create New Discussion</a>';
   $handler->display->display_options['footer']['area']['format'] = 'filtered_html';
-  $handler->display->display_options['footer']['area']['tokenize'] = TRUE;
+  $handler->display->display_options['footer']['area']['tokenize'] = 1;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -52,25 +55,52 @@ function ejrst_discussions_views_default_views() {
   $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = 'No discussions found for %1';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
-  $handler->display->display_options['empty']['area']['tokenize'] = TRUE;
+  $handler->display->display_options['empty']['area']['tokenize'] = 1;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
   /* Field: Content: New comments */
   $handler->display->display_options['fields']['new_comments']['id'] = 'new_comments';
   $handler->display->display_options['fields']['new_comments']['table'] = 'node';
   $handler->display->display_options['fields']['new_comments']['field'] = 'new_comments';
   $handler->display->display_options['fields']['new_comments']['label'] = '';
+  $handler->display->display_options['fields']['new_comments']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['new_comments']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['new_comments']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['new_comments']['alter']['html'] = 0;
   $handler->display->display_options['fields']['new_comments']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['new_comments']['format_plural'] = TRUE;
+  $handler->display->display_options['fields']['new_comments']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['new_comments']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['new_comments']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['new_comments']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['new_comments']['format_plural'] = 1;
   $handler->display->display_options['fields']['new_comments']['format_plural_singular'] = '1 new comment';
   $handler->display->display_options['fields']['new_comments']['format_plural_plural'] = '@count new comments';
   $handler->display->display_options['fields']['new_comments']['prefix'] = '(';
   $handler->display->display_options['fields']['new_comments']['suffix'] = ')';
+  $handler->display->display_options['fields']['new_comments']['link_to_comment'] = 1;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -88,15 +118,18 @@ function ejrst_discussions_views_default_views() {
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['field'] = 'field_discussion_article_target_id';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['default_action'] = 'default';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['default_argument_skip_url'] = 0;
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_discussion_article_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['specify_validation'] = 1;
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['validate_options']['types'] = array(
     'article' => 'article',
   );
-  $handler->display->display_options['arguments']['field_discussion_article_target_id']['validate_options']['access'] = TRUE;
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['validate_options']['access'] = '1';
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['not'] = 0;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -123,12 +156,14 @@ function ejrst_discussions_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['links'] = 1;
+  $handler->display->display_options['row_options']['comments'] = 0;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Article (field_discussion_article) */
@@ -137,15 +172,18 @@ function ejrst_discussions_views_default_views() {
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['field'] = 'field_discussion_article_target_id';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['default_action'] = 'not found';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['default_argument_skip_url'] = 0;
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_discussion_article_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['specify_validation'] = 1;
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_discussion_article_target_id']['validate_options']['types'] = array(
     'article' => 'article',
   );
-  $handler->display->display_options['arguments']['field_discussion_article_target_id']['validate_options']['access'] = TRUE;
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['validate_options']['access'] = '1';
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_discussion_article_target_id']['not'] = 0;
   $handler->display->display_options['path'] = 'node/%/discussions';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Discussions';
@@ -173,10 +211,6 @@ function ejrst_discussions_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
   );
   $export['article_discussions'] = $view;
 

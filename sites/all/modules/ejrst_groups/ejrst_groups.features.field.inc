@@ -399,7 +399,7 @@ function ejrst_groups_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => 'file',
-            'image_style' => 'group_picture_large',
+            'image_style' => '',
           ),
           'type' => 'image',
           'weight' => '0',
@@ -409,7 +409,7 @@ function ejrst_groups_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => 'content',
-            'image_style' => 'group_picture_small',
+            'image_style' => '',
           ),
           'type' => 'image',
           'weight' => '0',
@@ -555,7 +555,7 @@ function ejrst_groups_field_default_fields() {
           'label' => 'hidden',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '7',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -632,7 +632,7 @@ function ejrst_groups_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '8',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -691,7 +691,7 @@ function ejrst_groups_field_default_fields() {
       'no_ui' => TRUE,
       'settings' => array(
         'allowed_values' => array(),
-        'allowed_values_function' => 'og_features_get_features',
+        'allowed_values_function' => 'og_features_allowed_values',
       ),
       'translatable' => '0',
       'type' => 'list_text',
@@ -706,7 +706,7 @@ function ejrst_groups_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '6',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -727,7 +727,7 @@ function ejrst_groups_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '9',
+        'weight' => 9,
       ),
     ),
   );
