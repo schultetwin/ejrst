@@ -5,36 +5,92 @@
  */
 function ejrst_og_features_og_features_registry() {
   $options = array(
-    'discussion' => t('Discussions'),
-    'blog' => t('Blogs'),
-    'wiki' => t('Wiki'),
-    'events' => t('Events'),
-    'note' => t('Notes'),
-    'task' => t('Tasks'),
-    'news' => t('News'),
+    'discussion' => array(
+      'title' => t('Discussions'),
+      'entity' => array(
+        'node' => array(
+          'discussion',
+        ),
+      ),
+      'page' => array(
+        'type' => 'view',
+        'name' => 'group_discussions',
+      ),
+    ),
+    'blog' => array(
+      'title' => t('Blogs'),
+      'entity' => array(
+        'node' => array(
+          'blog',
+        ),
+      ),
+      'page' => array(
+        'type' => 'view',
+        'name' => 'group_blog',
+      ),
+    ),
+    'wiki' => array(
+      'title' => t('Wiki'),
+      'entity' => array(
+        'node' => array(
+          'wiki',
+        ),
+      ),
+      'page' => array(
+        'type' => 'view',
+        'name' => 'group_wiki',
+      ),
+    ),
+    'events' => array(
+      'title' => t('Events'),
+      'entity' => array(
+        'node' => array(
+          'event',
+        ),
+      ),
+      'page' => array(
+        'type' => 'view',
+        'name' => 'group_calendar',
+      ),
+    ),
+    'note' => array(
+      'title' => t('Notes'),
+      'entity' => array(
+        'node' => array(
+          'note',
+        ),
+      ),
+      'page' => array(
+        'type' => 'view',
+        'name' => 'group_notes',
+      ),
+    ),
+    'task' => array(
+      'title' => t('Tasks'),
+      'entity' => array(
+        'node' => array(
+          'task',
+        ),
+      ),
+      'page' => array(
+        'type' => 'view',
+        'name' => 'group_tasks',
+      ),
+    ),
+    'news' => array(
+      'title' => t('News'),
+      'entity' => array(
+        'node' => array(
+          'news',
+        ),
+      ),
+      'page' => array(
+        'type' => 'view',
+        'name' => 'group_news',
+      ),
+    ),
   );
   return $options;
-}
-
-/**
- * Implements hook_menu().
- */
-function ejrst_og_features_menu() {
-  $items = array();
-  foreach (ejrst_og_features_og_features_registry() as $key => $name) {
-    $items['node/%node/' . $key] = array(
-      'title' => $name,
-      'page callback' => 'ejrst_og_features_page',
-      'page arguments' => array(1, $key),
-      'access callback' => 'ejrst_og_features_access',
-      'access arguments' => array(1, $key),
-      'weight' => 2,
-      'file' => 'ejrst_og_features.pages.inc',
-      'type' => MENU_LOCAL_TASK,
-    );
-  }
-
-  return $items;
 }
 
 /**
@@ -45,14 +101,4 @@ function ejrst_og_features_views_api() {
     'api' => 3,
     'path' => drupal_get_path('module', 'ejrst_og_features') . '/views/',
   );
-}
-
-/*
- * Access callback for ejrst og features
- */
-function ejrst_og_features_access($node, $type) {
-  if (!og_features_is_enabled('node', $node, $type)) {
-    return FALSE;
-  }
-  return node_access('view', $node);
 }

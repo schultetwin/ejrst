@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EJRST Calendar feature.
+ */
+
+include_once 'ejrst_calendar.features.inc';

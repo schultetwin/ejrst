@@ -7,7 +7,7 @@ function ejrst_up_install() {
   $modules = array('comment', 'contextual', 'field_ui', 'file', 'image', 'list', 'menu', 'number', 'options', 'overlay',
       'path', 'shortcut', 'statistics', 'taxonomy', 'toolbar', 'ejrst_journal', 'ejrst_articles', 'ejrst_front_page',
       'ejrst_base', 'ejrst_groups', 'ejrst_notes', 'ejrst_tasks', 'ejrst_wiki', 'og_features', 'ejrst_og_features',
-      'views_form_checkboxes', 'ejrst_news',
+      'views_form_checkboxes', 'ejrst_news', 'ejrst_calendar'
     );
   module_enable($modules);
   ejrst_up_init_blocks();
@@ -95,6 +95,10 @@ function ejrst_up_update_7015(&$sandbox) {
 
 function ejrst_up_update_7016(&$sandbox) {
   //ejrst_up_feature_revert(array('ejrst_base'));
+}
+
+function ejrst_up_update_7017(&$sandbox) {
+  module_enable(array('ejrst_calendar'));
 }
 
 function ejrst_up_update_7017(&$sandbox) {

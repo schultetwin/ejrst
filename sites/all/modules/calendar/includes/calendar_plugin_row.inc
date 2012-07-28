@@ -482,6 +482,7 @@ class calendar_plugin_row extends views_plugin_row_fields {
       // At the end of our processing we'll need to swap in the fully formatted
       // display of the row. We save it here and switch it in
       // template_preprocess_calendar_item().
+      dsm($row);
       $event->rendered = theme($this->theme_functions(),
       array(
         'view' => $this->view,
