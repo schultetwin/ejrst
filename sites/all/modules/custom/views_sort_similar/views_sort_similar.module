@@ -51,6 +51,7 @@ function _views_sort_similar_get_tids($fields, $uid = null) {
 
   foreach ($fields as $key) {
     $items = field_get_items('user', $account, $key);
+    $items = is_array($items) ? $items : array();
     foreach ($items as $item) {
       $tids[] = $item['tid'];
     }
