@@ -15,6 +15,13 @@ function ejrst_articles_ctools_plugin_api() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function ejrst_articles_views_api() {
+  return array("version" => "3.0");
+}
+
+/**
  * Implements hook_flag_default_flags().
  */
 function ejrst_articles_flag_default_flags() {
@@ -45,16 +52,18 @@ function ejrst_articles_flag_default_flags() {
         1 => '4',
       ),
     ),
-    'show_on_page' => 1,
-    'show_on_teaser' => 1,
+    'weight' => 0,
     'show_on_form' => 0,
     'access_author' => '',
+    'show_on_page' => 1,
+    'show_on_teaser' => 1,
+    'show_contextual_link' => FALSE,
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 'ejrst_articles',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   return $flags;
 }

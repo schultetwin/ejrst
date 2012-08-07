@@ -10,7 +10,7 @@
 function ejrst_front_page_views_default_views() {
   $export = array();
 
-  $view = new view();
+  $view = new view;
   $view->name = 'articles_embed_slideshow_view';
   $view->description = 'This view is embedded in the frontpage slideshow';
   $view->tag = 'default';
@@ -25,6 +25,7 @@ function ejrst_front_page_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -86,7 +87,7 @@ function ejrst_front_page_views_default_views() {
   );
   $export['articles_embed_slideshow_view'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'frontpage_journal_slideshow';
   $view->description = 'Slideshow of recent journals';
   $view->tag = 'default';
@@ -102,6 +103,7 @@ function ejrst_front_page_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';

@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * Implements hook_views_api().
+ */
+function views_sort_similar_views_api() {
+  return array(
+    'version' => 3,
+  );
+}
+
+/**
+ * Implements hook_field_views_data_alter().
+ */
+function views_sort_similar_views_data_alter(&$data) {
+  $data['node']['views_sort_similiar_taxonomy'] = array(
+    'title' => t('Sort by Similiar User Terms'),
+    'help' => t('Sorts results by the similiarity between a given users and nodes'),
+    'real field' => 'nid',
+    'sort' => array(
+      'handler' => 'views_sort_similar_sort_handler_taxonomy',
+    ),
+  );
+}
+
+/**
+ * Gets all the taxonomy references in the user bundle.
+ * @return array (keyed for instance_name => "Instance Name")
+ */
+function _views_sort_similiar_user_tax_fields() {
+  $results = array();
+  $fields = field_info_instances('user', 'user');
+  foreach ($fields as $field) {
+    $field_info = field_info_field($field['field_name']);
+    if ($field_info['type'] == 'taxonomy_term_reference') {
+      $results[$field_info['field_name']] = $field['label'];
+    }
+  }
+  return $results;
+}
+
+function _views_sort_similar_get_tids($fields, $uid = null) {
+  $tids = array();
+  $account = null;
+  if ($uid == null) {
+    global $user;
+    $account = $user;
+  }
+  else $account = user_load($uid);
+
+  foreach ($fields as $key) {
+    $items = field_get_items('user', $account, $key);
+    foreach ($items as $item) {
+      $tids[] = $item['tid'];
+    }
+  }
+  return $tids;
+}

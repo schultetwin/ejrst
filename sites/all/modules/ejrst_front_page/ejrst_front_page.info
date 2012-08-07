@@ -12,6 +12,7 @@ dependencies[] = views
 dependencies[] = views_field_view
 dependencies[] = views_slideshow
 dependencies[] = views_slideshow_cycle
+dependencies[] = views_sort_similar
 features[context][] = frontpage
 features[ctools][] = context:context:3
 features[ctools][] = strongarm:strongarm:1

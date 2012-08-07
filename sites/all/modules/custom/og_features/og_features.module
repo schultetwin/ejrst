@@ -54,6 +54,29 @@ function og_features_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_field_widget_form_alter().
+ *
+ * Alters the group_audience field, disabling or hiding it when asked.
+ */
+function og_features_field_widget_form_alter(&$element, &$form_state, $context) {
+  $field = $context['field'];
+  $instance = $context['instance'];
+  if ($field['field_name'] == 'group_audience') {
+    //$element['#access'] = FALSE;
+    if ($group = og_context()) {
+
+    }
+  }
+}
+
+/**
+ * Implements hook_field_info_alter().
+ */
+function og_features_field_info_alter($fields) {
+  $fields['group']['instance_settings']['force_group_context'] = FALSE;
+}
+
 
 /**
  * Calls hook to define all the enabled/disabled group features.

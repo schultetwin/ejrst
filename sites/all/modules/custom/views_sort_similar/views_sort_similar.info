@@ -1,0 +1,6 @@
+name = Views Sort Similar
+description = Adds a sort option to the node table to sort by taxonomy sii
+package = Other
+core = 7.x
+
+files[] = views/views_sort_similar_sort_handler_taxonomy.inc

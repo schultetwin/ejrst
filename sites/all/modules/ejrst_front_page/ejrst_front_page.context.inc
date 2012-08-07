@@ -26,11 +26,17 @@ function ejrst_front_page_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-8fd674bfe17656a5934f87304facf69b' => array(
+          'module' => 'views',
+          'delta' => '8fd674bfe17656a5934f87304facf69b',
+          'region' => 'sidebar_second',
+          'weight' => '-10',
+        ),
         'views-featured_articles-block' => array(
           'module' => 'views',
           'delta' => 'featured_articles-block',
           'region' => 'sidebar_second',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
       ),
     ),

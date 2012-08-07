@@ -429,7 +429,7 @@ function ejrst_og_features_views_default_views() {
   $views[$view->name] = $view;
 
   // Group wiki
-  $view = new view();
+  $view = new view;
   $view->name = 'group_wiki';
   $view->description = '';
   $view->tag = 'default';
@@ -444,10 +444,19 @@ function ejrst_og_features_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No group wiki content';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -460,7 +469,7 @@ function ejrst_og_features_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Field: Groups (group_audience:gid) */
+  /* Contextual filter: Field: Groups audience (group_audience:gid) */
   $handler->display->display_options['arguments']['group_audience_gid']['id'] = 'group_audience_gid';
   $handler->display->display_options['arguments']['group_audience_gid']['table'] = 'field_data_group_audience';
   $handler->display->display_options['arguments']['group_audience_gid']['field'] = 'group_audience_gid';
@@ -494,10 +503,7 @@ function ejrst_og_features_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('No group wiki content'),
     t('All'),
   );
 
