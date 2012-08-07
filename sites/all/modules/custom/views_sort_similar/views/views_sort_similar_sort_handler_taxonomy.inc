@@ -110,6 +110,7 @@ class views_sort_similar_sort_handler_taxonomy extends views_handler_sort {
         throw new Exception("No UID options given");
         break;
     }
+     if (!is_array($this->options['user_tax_fields'])) $this->options['user_tax_fields'] = array();
     $this->tids = _views_sort_similar_get_tids($this->options['user_tax_fields'], $uid);
   }
 
