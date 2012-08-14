@@ -159,8 +159,8 @@ function og_features_access($node, $feature) {
 
 function og_features_node_access($node, $op, $account) {
   $allow_deny = NODE_ACCESS_IGNORE;
-  $type = is_object($node) ? $node->type : $node;
-  $features = og_features_get_feature_for_entity_type('node', $type);
+  if (!is_object($node)) return $allow_deny;
+  $features = og_features_get_feature_for_entity_type('node', $node->type);
   if (!empty($features)) {
     $allow_deny = NODE_ACCESS_DENY;
     foreach ($features as $feature) {
