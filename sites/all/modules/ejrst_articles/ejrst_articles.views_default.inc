@@ -88,6 +88,10 @@ function ejrst_articles_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'user_suggested_articles');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $translatables['suggested_articles_by_user'] = array(
     t('Master'),
     t('Suggested Articles'),
