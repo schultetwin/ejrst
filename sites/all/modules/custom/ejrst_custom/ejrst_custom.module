@@ -96,8 +96,13 @@ function ejrst_custom_field_access($op, $field, $entity_type, $entity, $account)
  * Implements hook_node_validate(). Make sure that in a discussion either an article
  * or a group isset. Otherwise, we will lose discussions.
  */
-function erjst_custom_node_validate($node, $form, &$form_state) {
-  $one =1 ;
+function ejrst_custom_node_validate($node, $form, &$form_state) {
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  $audience = field_get_items('node', $node, 'group_audience');
+  $article = $node_wrapper->field_discussion_article->value();
+  if (!$audience && !isset($article)) {
+    form_set_error('group_audience', t('Discussion must be posted into a group.'));
+  }
 }
 
 /**
