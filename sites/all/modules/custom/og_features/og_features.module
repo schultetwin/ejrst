@@ -158,6 +158,8 @@ function og_features_access($node, $feature) {
 }
 
 function og_features_node_access($node, $op, $account) {
+  // This is broken
+  return NODE_ACCESS_IGNORE;
   $allow_deny = NODE_ACCESS_IGNORE;
   if (!is_object($node)) return $allow_deny;
   $features = og_features_get_feature_for_entity_type('node', $node->type);

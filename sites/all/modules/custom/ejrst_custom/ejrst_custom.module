@@ -85,11 +85,19 @@ function ejrst_custom_form_article_node_form_alter(&$form, &$form_state, $form_i
  * field if we are adding it to an article.
  */
 function ejrst_custom_field_access($op, $field, $entity_type, $entity, $account) {
-  if ($entity_type == 'node' && !is_null($entity) && $entity->type == 'discussion' && $field['field_name'] == 'group_audience') {
+  if ($op == 'edit' && $entity_type == 'node' && !is_null($entity) && $entity->type == 'discussion' && $field['field_name'] == 'group_audience') {
     if (isset($_GET['field_discussion_article']) && is_numeric($_GET['field_discussion_article'])) {
       return FALSE;
     }
   }
+}
+
+/**
+ * Implements hook_node_validate(). Make sure that in a discussion either an article
+ * or a group isset. Otherwise, we will lose discussions.
+ */
+function erjst_custom_node_validate($node, $form, &$form_state) {
+  $one =1 ;
 }
 
 /**
