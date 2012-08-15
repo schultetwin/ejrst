@@ -12,6 +12,7 @@ dependencies[] = image
 dependencies[] = list
 dependencies[] = node
 dependencies[] = og
+dependencies[] = og_context
 dependencies[] = options
 dependencies[] = strongarm
 dependencies[] = taxonomy
