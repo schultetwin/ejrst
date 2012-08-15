@@ -10,7 +10,7 @@
 function ejrst_journal_views_default_views() {
   $export = array();
 
-  $view = new view();
+  $view = new view;
   $view->name = 'issues_in_journal';
   $view->description = 'Lists all issues in a journal (given argument of nid of journal). This is programmatically added to the view';
   $view->tag = 'default';
@@ -126,10 +126,6 @@ function ejrst_journal_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
     t('No articles found in journal'),
     t('Author'),
     t('View in Wiley'),

@@ -45,7 +45,8 @@ function ejrst_tasks_user_default_permissions() {
     'name' => 'edit own tasks content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
+      1 => 'authenticated user',
+      2 => 'editor',
     ),
     'module' => 'node',
   );

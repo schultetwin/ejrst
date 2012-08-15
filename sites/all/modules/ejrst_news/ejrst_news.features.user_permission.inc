@@ -15,7 +15,8 @@ function ejrst_news_user_default_permissions() {
     'name' => 'create news content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
+      1 => 'authenticated user',
+      2 => 'editor',
     ),
     'module' => 'node',
   );
@@ -55,7 +56,8 @@ function ejrst_news_user_default_permissions() {
     'name' => 'edit own news content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'editor',
+      1 => 'authenticated user',
+      2 => 'editor',
     ),
     'module' => 'node',
   );
