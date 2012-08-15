@@ -862,7 +862,7 @@ function ejrst_groups_field_default_fields() {
           'opt_group' => 'auto',
         ),
         'type' => 'group_audience',
-        'weight' => '7',
+        'weight' => 7,
       ),
       'widget_type' => 'group_audience',
     ),
