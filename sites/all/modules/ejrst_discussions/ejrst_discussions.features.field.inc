@@ -208,7 +208,7 @@ function ejrst_discussions_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '1',
+        'weight' => '3',
       ),
     ),
   );
@@ -268,7 +268,7 @@ function ejrst_discussions_field_default_fields() {
       'default_value' => NULL,
       'default_value_function' => 'entityreference_prepopulate_field_default_value',
       'deleted' => '0',
-      'description' => 'Discussions may relate to an article. Only admins and editors are allowed to set this setting. Otherwise, this should not appear.',
+      'description' => 'Discussions may relate to an article. Only admins and editors are allowed to set this setting.',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -293,7 +293,7 @@ function ejrst_discussions_field_default_fields() {
       'settings' => array(
         'behaviors' => array(
           'prepopulate' => array(
-            'action' => 'hide',
+            'action' => 'disable',
             'fallback' => 'hide',
             'skip_perm' => 'edit any discussion content',
             'status' => 1,
@@ -306,7 +306,7 @@ function ejrst_discussions_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '3',
+        'weight' => '1',
       ),
     ),
   );
@@ -379,7 +379,7 @@ function ejrst_discussions_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => '2',
+        'weight' => '4',
       ),
     ),
   );
@@ -459,7 +459,7 @@ function ejrst_discussions_field_default_fields() {
           'opt_group' => 'auto',
         ),
         'type' => 'group_audience',
-        'weight' => '0',
+        'weight' => '2',
       ),
       'widget_type' => 'group_audience',
     ),
@@ -471,7 +471,7 @@ function ejrst_discussions_field_default_fields() {
   t('Attachments');
   t('Comment');
   t('Discussion Topic');
-  t('Discussions may relate to an article. Only admins and editors are allowed to set this setting. Otherwise, this should not appear.');
+  t('Discussions may relate to an article. Only admins and editors are allowed to set this setting.');
   t('Enter what you would like to talk about');
   t('Groups');
   t('Select which groups this content should appear in.');

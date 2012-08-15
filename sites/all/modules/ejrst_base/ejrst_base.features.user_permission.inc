@@ -390,7 +390,7 @@ function ejrst_base_user_default_permissions() {
   $permissions['create url aliases'] = array(
     'name' => 'create url aliases',
     'roles' => array(
-      0 => 'authenticated user',
+      0 => 'administrator',
       1 => 'editor',
     ),
     'module' => 'path',

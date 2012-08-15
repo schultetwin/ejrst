@@ -95,7 +95,7 @@ function ejrst_discussions_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
@@ -130,7 +130,6 @@ function ejrst_discussions_strongarm() {
   $strongarm->name = 'node_options_discussion';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'revision',
   );
   $export['node_options_discussion'] = $strongarm;
 
