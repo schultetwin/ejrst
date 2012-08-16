@@ -26,3 +26,7 @@
   font-size: 1.1em;
 }
 
+.node.node-teaser .field-name-field-group-picture {
+  float: left;
+  margin-right: 7px;
+}

@@ -44,7 +44,6 @@ function ejrst_custom_node_view($node, $view_mode, $langcode) {
       array('#markup' => t('Articles in Issue'), '#prefix' => '<div class="articles-in-issue-title">', '#suffix' => '</div>'),
       array('#markup' => views_embed_view('issues_in_journal', 'default', $node->nid)),
     );
-    drupal_add_css(drupal_get_path('module', 'ejrst_custom') . '/ejrst_custom.css');
   }
 }
 
@@ -71,11 +70,6 @@ function ejrst_custom_field_extra_fields() {
  */
 function ejrst_custom_form_journal_node_form_alter(&$form, &$form_state, $form_id) {
   unset($form['title']);
-}
-
-function ejrst_custom_form_article_node_form_alter(&$form, &$form_state, $form_id) {
-  drupal_add_css(drupal_get_path('module', 'ejrst_custom') . '/ejrst_custom.css');
-
 }
 
 /**

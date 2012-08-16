@@ -2,3 +2,5 @@ name = EJRST Custom
 description = Provides several customizations for the ejrst site
 package = Other
 core = 7.x
+
+stylesheets[all][] = ejrst_custom.css
