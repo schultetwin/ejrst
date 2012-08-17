@@ -399,7 +399,7 @@ function ejrst_groups_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => 'file',
-            'image_style' => '',
+            'image_style' => 'group_picture_large',
           ),
           'type' => 'image',
           'weight' => '0',
@@ -599,6 +599,9 @@ function ejrst_groups_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'group_group',
+      'field_permissions' => array(
+        'type' => '1',
+      ),
       'foreign keys' => array(),
       'indexes' => array(
         'value' => array(
@@ -645,7 +648,7 @@ function ejrst_groups_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'group_group',
       'label' => 'Group',
-      'required' => FALSE,
+      'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -662,6 +665,7 @@ function ejrst_groups_field_default_fields() {
         ),
       ),
       'widget' => array(
+        'active' => 1,
         'module' => 'options',
         'settings' => array(
           'display_label' => 0,
