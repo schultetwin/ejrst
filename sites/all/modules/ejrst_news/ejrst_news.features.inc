@@ -15,6 +15,13 @@ function ejrst_news_ctools_plugin_api() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function ejrst_news_views_api() {
+  return array("version" => "3.0");
+}
+
+/**
  * Implements hook_node_info().
  */
 function ejrst_news_node_info() {

@@ -35,26 +35,6 @@ function og_features_og_fields_info() {
 }
 
 /**
- * Defines hook_menu().
- */
-function og_features_menu() {
-  $items = array();
-  foreach (og_features_get_features() as $key => $info) {
-    $items['node/%node/' . $key] = array(
-      'title' => $info['title'],
-      'page callback' => 'og_features_page',
-      'page arguments' => array(1, $key),
-      'access callback' => 'og_features_access',
-      'access arguments' => array(1, $key),
-      'weight' => 2,
-      'type' => MENU_LOCAL_TASK,
-    );
-  }
-
-  return $items;
-}
-
-/**
  * Implements hook_field_widget_form_alter().
  *
  * Alters the group_audience field, disabling or hiding it when asked.
@@ -99,12 +79,7 @@ function og_features_get_features($type = "") {
 }
 
 function og_features_allowed_values($field, $instance, $entity_type, $entity, $cacheable) {
-  $types = og_features_get_features();
-  $return = array();
-  foreach ($types as $key => $type) {
-    $return[$key] = $type['title'];
-  }
-  return $return;
+  return og_features_select_list();
 }
 
 /**
@@ -117,9 +92,13 @@ function og_features_reset_get_features() {
 /**
  * Group get enabled features
  */
-function og_features_group($entity_type, $entity) {
+function og_features_group($group) {
   $return = array();
-  $values = field_get_items($entity_type, $entity, OG_FEATURES_FIELD);
+  if (!is_object(($group))) return $return;
+  $group_metadata = entity_metadata_wrapper('group', $group);
+  if (!is_object($group_metadata)) return $return;
+
+  $values = field_get_items($group_metadata->entity_type->value(), $group_metadata->entity->value(), OG_FEATURES_FIELD);
   if (!empty($values)) {
     foreach ($values as $val) {
       $return[] = $val['value'];
@@ -131,27 +110,26 @@ function og_features_group($entity_type, $entity) {
 /**
  * See if a feature is enabled for a group
  */
-function og_features_is_enabled($entity_type, $entity, $feature) {
-  $values = og_features_group($entity_type, $entity);
+function og_features_is_enabled($group, $feature) {
+  $values = og_features_group($group);
   return in_array($feature, $values);
 }
 
-function og_features_page($node, $feature) {
-  $feature = og_features_get_features($feature);
-  $group = og_get_group('node', $node->nid);
-  if (is_string($feature['page'])) return $feature['page']($node);
-  else {
-    switch ($feature['page']['type']) {
-      case 'view':
-        return views_embed_view($feature['page']['name'], 'default', $group->gid);
-      case 'custom':
-        return $feature['page']($node);
-    }
-  }
-}
-
+/**
+ * hook_menu() access callback for og_features_pages.
+ *
+ * Checks to make sure that node is also group. If node is not a group we return false.
+ * @param type $node
+ * @param type $feature
+ * @return boolean
+ */
 function og_features_access($node, $feature) {
+  // Make sure that the feature is enabled
   if (!og_features_is_enabled('node', $node, $feature)) {
+    return FALSE;
+  }
+  // Make sure the node is also a group
+  if (!og_get_group('node', $node->nid)) {
     return FALSE;
   }
   return node_access('view', $node);
@@ -195,4 +173,22 @@ function og_features_get_feature_for_entity_type($entity_type, $bundle) {
     }
   }
   return $return;
+}
+
+function og_features_select_list() {
+  $types = og_features_get_features();
+  $return = array();
+  foreach ($types as $key => $type) {
+    $return[$key] = $type['title'];
+  }
+  return $return;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function og_features_views_api() {
+  return array(
+    'api' => 3,
+  );
 }

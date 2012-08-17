@@ -2,3 +2,11 @@ name = OG Features
 description = Allows for groups to enable or disable specific functionality
 package = OG Features
 core = 7.x
+
+files[] = og_features.views.inc
+files[] = og_feature_argument_validate_nid_as_gid.inc
+
+dependencies[] = og
+dependencies[] = entity
+dependencies[] = og_viewscontext
+dependencies[] = views

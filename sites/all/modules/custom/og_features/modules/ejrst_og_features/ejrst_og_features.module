@@ -12,22 +12,6 @@ function ejrst_og_features_og_features_registry() {
           'discussion',
         ),
       ),
-      'page' => array(
-        'type' => 'view',
-        'name' => 'group_discussions',
-      ),
-    ),
-    'blog' => array(
-      'title' => t('Blogs'),
-      'entity' => array(
-        'node' => array(
-          'blog',
-        ),
-      ),
-      'page' => array(
-        'type' => 'view',
-        'name' => 'group_blog',
-      ),
     ),
     'wiki' => array(
       'title' => t('Wiki'),
@@ -35,10 +19,6 @@ function ejrst_og_features_og_features_registry() {
         'node' => array(
           'wiki',
         ),
-      ),
-      'page' => array(
-        'type' => 'view',
-        'name' => 'group_wiki',
       ),
     ),
     'events' => array(
@@ -48,10 +28,6 @@ function ejrst_og_features_og_features_registry() {
           'event',
         ),
       ),
-      'page' => array(
-        'type' => 'view',
-        'name' => 'group_calendar',
-      ),
     ),
     'note' => array(
       'title' => t('Notes'),
@@ -59,10 +35,6 @@ function ejrst_og_features_og_features_registry() {
         'node' => array(
           'note',
         ),
-      ),
-      'page' => array(
-        'type' => 'view',
-        'name' => 'group_notes',
       ),
     ),
     'task' => array(
@@ -72,10 +44,6 @@ function ejrst_og_features_og_features_registry() {
           'task',
         ),
       ),
-      'page' => array(
-        'type' => 'view',
-        'name' => 'group_tasks',
-      ),
     ),
     'news' => array(
       'title' => t('News'),
@@ -84,21 +52,7 @@ function ejrst_og_features_og_features_registry() {
           'news',
         ),
       ),
-      'page' => array(
-        'type' => 'view',
-        'name' => 'group_news',
-      ),
     ),
   );
   return $options;
-}
-
-/**
- * Implements hook_views_api().
- */
-function ejrst_og_features_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'ejrst_og_features') . '/views/',
-  );
 }
