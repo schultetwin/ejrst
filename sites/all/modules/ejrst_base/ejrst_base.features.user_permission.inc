@@ -497,6 +497,36 @@ function ejrst_base_user_default_permissions() {
     'module' => 'locale',
   );
 
+  // Exported permission: use flag import.
+  $permissions['use flag import'] = array(
+    'name' => 'use flag import',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'flag',
+  );
+
+  // Exported permission: use text format filtered_html.
+  $permissions['use text format filtered_html'] = array(
+    'name' => 'use text format filtered_html',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'authenticated user',
+      2 => 'editor',
+    ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: use text format full_html.
+  $permissions['use text format full_html'] = array(
+    'name' => 'use text format full_html',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'editor',
+    ),
+    'module' => 'filter',
+  );
+
   // Exported permission: view own unpublished content.
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',

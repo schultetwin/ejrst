@@ -60,4 +60,5 @@ features[variable][] = node_options_article
 features[variable][] = node_preview_article
 features[variable][] = node_submitted_article
 features[variable][] = save_continue_article
+features[views_view][] = featured_articles
 features[views_view][] = suggested_articles_by_user

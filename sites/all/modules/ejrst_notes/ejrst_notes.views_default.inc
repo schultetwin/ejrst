@@ -39,6 +39,7 @@ function ejrst_notes_views_default_views() {
   $handler->display->display_options['header']['add_content_link']['bundle'] = 'notes';
   $handler->display->display_options['header']['add_content_link']['into_group'] = 1;
   $handler->display->display_options['header']['add_content_link']['link_title'] = 'Add New Note';
+  $handler->display->display_options['header']['add_content_link']['link_perm'] = 'create notes content';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';

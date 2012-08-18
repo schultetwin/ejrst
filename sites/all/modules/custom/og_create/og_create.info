@@ -1,0 +1,6 @@
+name = OG Create
+description = Makes create permissions for OG module. Uses context.
+package = OG Features
+core = 7.x
+
+dependencies[] = og

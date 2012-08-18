@@ -28,7 +28,7 @@ function ejrst_calendar_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'date_views_pager';
   $handler->display->display_options['style_plugin'] = 'calendar_style';
   $handler->display->display_options['style_options']['name_size'] = '3';
   $handler->display->display_options['style_options']['mini'] = '0';
@@ -74,6 +74,7 @@ function ejrst_calendar_views_default_views() {
   $handler->display->display_options['header']['add_content_link']['bundle'] = 'event';
   $handler->display->display_options['header']['add_content_link']['into_group'] = 1;
   $handler->display->display_options['header']['add_content_link']['link_title'] = 'Add New Event';
+  $handler->display->display_options['header']['add_content_link']['link_perm'] = 'create event content';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -184,9 +185,6 @@ function ejrst_calendar_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
     t('No Events for this Group'),
     t('Location'),
     t('All'),

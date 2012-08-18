@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the EJRST Users feature.
+ */
+
+include_once 'ejrst_users.features.inc';

@@ -41,6 +41,7 @@ function ejrst_news_views_default_views() {
   $handler->display->display_options['header']['add_content_link']['bundle'] = 'news';
   $handler->display->display_options['header']['add_content_link']['into_group'] = 1;
   $handler->display->display_options['header']['add_content_link']['link_title'] = 'Add new News Entry';
+  $handler->display->display_options['header']['add_content_link']['link_perm'] = 'create news content';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';

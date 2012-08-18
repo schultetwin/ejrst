@@ -39,6 +39,7 @@ function ejrst_wiki_views_default_views() {
   $handler->display->display_options['header']['add_content_link']['bundle'] = 'wiki';
   $handler->display->display_options['header']['add_content_link']['into_group'] = 1;
   $handler->display->display_options['header']['add_content_link']['link_title'] = 'Add Wiki Entry';
+  $handler->display->display_options['header']['add_content_link']['link_perm'] = 'create wiki content';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';

@@ -109,6 +109,27 @@ function ejrst_up_update_7019(&$sandbox) {
   module_enable(array('ejrst_calendar'));
 }
 
+/**
+ * Disable og_field_access
+ */
+function ejrst_up_update_7020(&$sandbox) {
+  module_disable(array('og_field_access'));
+}
+
+/**
+ * Enable og_create module
+ */
+function ejrst_up_update_7021(&$sandbox) {
+  module_enable(array('og_create'));
+}
+
+/**
+ * Enable the ejrst_users feature.
+ */
+function ejrst_up_update_7022(&$sandbox) {
+  module_enable(array('ejrst_users'));
+}
+
 function ejrst_up_init_blocks() {
   db_update('block')
     ->fields(array('region' => -1))

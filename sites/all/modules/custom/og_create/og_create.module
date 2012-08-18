@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_og_permission().
+ */
+function og_create_og_permission() {
+  $perms = array();
+  foreach (node_type_get_names() as $key => $name) {
+    $perms['create ' . $key . ' content'] = array(
+      'title' => t('Create %label Content', array('%label' => $name)),
+      'default role' => array(OG_AUTHENTICATED_ROLE),
+    );
+  }
+  return $perms;
+}
+
+/**
+ * Implements hook_node_access(). Deny creation if node has group audience field and user cannot post
+ * into group context
+ */
+function og_create_node_access($node, $op, $account) {
+  $groups = array();
+  if ($op == 'create') {
+    $groups = og_get_context_by_url();
+    foreach ($groups as $gid) {
+      $group = og_load($gid);
+      if (!og_user_access($group->gid, 'create ' . $node . ' content')) {
+        return NODE_ACCESS_DENY;
+      }
+    }
+  }
+}
